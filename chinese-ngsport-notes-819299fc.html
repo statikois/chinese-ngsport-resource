@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ng体育 · 知识库入口</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f4f6f9;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: #1e293b;
+      line-height: 1.6;
+      padding: 0 1rem 3rem;
+    }
+
+    /* 深色头图 */
+    .hero {
+      background: linear-gradient(145deg, #0b1a2e 0%, #1b2f44 100%);
+      color: #e7edf5;
+      padding: 4rem 2rem 3.5rem;
+      margin: 1.5rem -1rem 0;
+      border-bottom-left-radius: 60px 20px;
+      border-bottom-right-radius: 60px 20px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0, 20, 40, 0.3);
+    }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      margin-bottom: 0.6rem;
+      color: #f0f6fe;
+    }
+
+    .hero .sub {
+      font-size: 1.1rem;
+      opacity: 0.8;
+      max-width: 700px;
+      margin: 0 auto 1.8rem;
+      font-weight: 300;
+    }
+
+    .hero .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 0.4rem 1.5rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      color: #bcd4ec;
+      backdrop-filter: blur(2px);
+    }
+
+    /* 主内容区（浅色） */
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
+
+    /* 目录感布局：网格 + 卡片 */
+    .grid-intro {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.8rem;
+      margin: 2rem 0 2.5rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 1.6rem 1.6rem 1.8rem;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+      transition: 0.2s ease;
+      border: 1px solid rgba(0, 0, 0, 0.02);
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 22px rgba(0, 30, 60, 0.08);
+      transform: translateY(-3px);
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 0.6rem;
+      color: #0b1a2e;
+      border-left: 4px solid #3b82f6;
+      padding-left: 0.7rem;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #334155;
+      margin-bottom: 0.2rem;
+    }
+
+    .card ul {
+      list-style: none;
+      margin-top: 0.4rem;
+    }
+
+    .card li {
+      padding: 0.2rem 0;
+      font-size: 0.92rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+    }
+
+    .card li::before {
+      content: "·";
+      color: #3b82f6;
+      font-weight: bold;
+      margin-right: 0.2rem;
+    }
+
+    /* 说明区 / 提示区 / FAQ  */
+    .section-block {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 2rem 2rem 1.8rem;
+      margin: 2rem 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      border: 1px solid #eef2f6;
+    }
+
+    .section-block h2 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+      color: #0f172a;
+      letter-spacing: 0.3px;
+    }
+
+    .section-block p,
+    .section-block li {
+      font-size: 0.98rem;
+      color: #1e293b;
+    }
+
+    .info-highlight {
+      background: #f1f5fe;
+      border-radius: 20px;
+      padding: 1.2rem 1.6rem;
+      margin: 1.2rem 0;
+      border-left: 6px solid #3b82f6;
+    }
+
+    .tip-box {
+      background: #f8fafc;
+      border: 1px dashed #b9c9e0;
+      border-radius: 24px;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #1e293b;
+      font-size: 0.95rem;
+    }
+
+    .faq-item {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #e9edf3;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-q {
+      font-weight: 500;
+      color: #0b1a2e;
+    }
+
+    .faq-a {
+      margin-top: 0.3rem;
+      color: #475569;
+    }
+
+    .related-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1.5rem;
+      margin: 1.2rem 0 0.2rem;
+    }
+
+    .related-links a {
+      color: #2563eb;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: 0.15s;
+      font-weight: 450;
+    }
+
+    .related-links a:hover {
+      border-bottom-color: #2563eb;
+    }
+
+    /* 强调色链接 */
+    a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 450;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: #1d4ed8;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #dfe6ef;
+      margin: 2rem 0;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-top: 3rem;
+    }
+
+    /* 响应式 */
+    @media (max-width: 640px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero {
+        padding: 3rem 1.2rem 2.8rem;
+        border-bottom-left-radius: 40px 16px;
+        border-bottom-right-radius: 40px 16px;
+      }
+
+      .card {
+        padding: 1.4rem;
+      }
+
+      .section-block {
+        padding: 1.5rem;
+      }
+
+      .grid-intro {
+        gap: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 深色头图 -->
+  <header class="hero">
+    <h1>主题内容 · 知识入口</h1>
+    <p class="sub">围绕关键词背后脉络，整理信息结构与实用提示，建立一个可查阅的起点。</p>
+    <span class="badge">📋 目录式索引 · 克制叙述</span>
+  </header>
+
+  <div class="container">
+
+    <!-- 目录感布局：三个卡片 -->
+    <div class="grid-intro">
+      <div class="card">
+        <h3>⛳ 主题背景</h3>
+        <p>从关键词延伸出的运动、数据与内容生态，信息流往往围绕赛事、训练与社区展开。我们尝试把碎片整理为可读的条目。</p>
+      </div>
+      <div class="card">
+        <h3>📂 常见话题</h3>
+        <ul>
+          <li>赛事动态与规则解读</li>
+          <li>技术分析与装备选择</li>
+          <li>文化视角与用户讨论</li>
+          <li>内容聚合与信息筛选</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>🔍 信息特征</h3>
+        <p>内容源多样，更新节奏快。保持客观视角有助于避免噪音干扰，也更容易找到契合自己兴趣的板块。</p>
+      </div>
+    </div>
+
+    <!-- 说明区：细颗粒度介绍 -->
+    <div class="section-block">
+      <h2>关于这个知识库</h2>
+      <p>这里不提供结论，只梳理线索。无论是刚接触相关话题，还是希望快速回顾某个侧面，都能在这里找到结构化的入口。我们试图把散落的信息点组织成可参考的框架——避免过度简化，也不堆砌术语。</p>
+      <div class="info-highlight">
+        <strong>出发点：</strong> 信息过载时代，一个克制的索引比无穷无尽的推送更有温度。因此这个页面只做整合与提示，不代替任何专业判断。
+      </div>
+      <p style="margin-top: 0.8rem;">如果你希望直接浏览整体内容，可以前往 <a href="https://chinese-ngsport.com">ng体育</a> 查看持续更新的信息流。页面本身保持轻量，方便随时查阅。</p>
+    </div>
+
+    <!-- 提示区 + 相关信息区 合并 -->
+    <div class="section-block" style="background: #fafcff;">
+      <h2>提示 · 相关信息</h2>
+      <div class="tip-box">
+        <strong>💡 查阅建议：</strong> 遇到具体主题时，先利用分类标签缩小范围，再深入阅读单篇内容。许多讨论往往在评论区产生更有价值的补充。
+      </div>
+
+      <h3 style="font-weight: 500; font-size: 1.1rem; margin: 1.2rem 0 0.6rem;">常见信息类型</h3>
+      <ul style="list-style: none; padding-left: 0;">
+        <li style="margin-bottom: 0.4rem;">· 动态资讯：时效性高，适合快速浏览标题与摘要。</li>
+        <li style="margin-bottom: 0.4rem;">· 分析文章：结构完整，建议留出完整阅读时间。</li>
+        <li style="margin-bottom: 0.4rem;">· FAQ 与技巧：碎片化整理，可以按需检索。</li>
+      </ul>
+
+      <div style="margin-top: 1.5rem;">
+        <span style="font-weight: 500; display: block; margin-bottom: 0.4rem;">相关方向（非限定）</span>
+        <div class="related-links">
+          <a href="#">赛事记录</a>
+          <a href="#">训练方法</a>
+          <a href="#">器材讨论</a>
+          <a href="#">社区动态</a>
+          <a href="#">文化与观察</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ 摘要区 -->
+    <div class="section-block">
+      <h2>常见梳理 · FAQ 摘要</h2>
+      <div class="faq-item">
+        <div class="faq-q">这个知识库入口主要面向谁？</div>
+        <div class="faq-a">希望快速了解主题概况、寻找信息脉络的普通读者或轻度研究者。不需要先验知识，也不预设立场。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">信息更新频率如何？</div>
+        <div class="faq-a">不定期根据内容生态变化做索引调整，保持入口的有效性。具体页面的时效性请以源站标注为准。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">如何获得更完整的全景？</div>
+        <div class="faq-a">你可以将本页面作为起点，然后结合 <a href="https://chinese-ngsport.com">ng体育</a> 中的分类板块延伸阅读，形成自己的信息地图。</div>
+      </div>
+    </div>
+
+    <!-- 额外的克制叙述 -->
+    <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between; margin: 1rem 0 0.5rem; font-size: 0.9rem; color: #4b5b6f;">
+      <span>📌 不提供投资或医疗建议</span>
+      <span>📌 所有链接仅为信息索引</span>
+      <span>📌 内容仅供参考</span>
+    </div>
+
+    <hr>
+
+    <div class="footer-note">
+      知识库入口 · 页面结构随方向调整 · 保持克制与清晰
+    </div>
+
+  </div>
+  <!-- container end -->
+
+</body>
+</html>
